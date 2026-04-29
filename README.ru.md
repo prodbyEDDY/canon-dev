@@ -1,5 +1,8 @@
+<p align="center">
+  <img src="assets/cover.jpg" alt="canon-dev — пиксельная ракета с Claude летит сквозь canon pipeline" width="100%" />
+</p>
+
 <div align="center">
-  <img src="assets/logo.svg" alt="canon-dev logo" width="96" height="96" />
 
   # canon-dev
 
