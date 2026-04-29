@@ -64,24 +64,55 @@ Higher levels override lower ones. Canon beats spec. Spec beats plan. Plan beats
 
 ## Installation
 
-Each skill in `skills/` is a self-contained folder with a `SKILL.md` manifest (YAML frontmatter + body) and optional `references/` or `templates/`. Installation just means making that folder discoverable to your agent platform.
-
-### Claude Code
+One command, all platforms:
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/prodbyEDDY/canon-dev.git ~/canon-dev
+npx skills add prodbyEDDY/canon-dev
+```
 
-# 2. Symlink skills into your Claude Code skills directory
+This uses the [`skills`](https://skills.sh) CLI from Vercel Labs. It clones the repo, asks which agents to target (Claude Code, Codex, Cursor, Continue, OpenCode, Cline, Amp, Gemini CLI — 50+ supported), and symlinks all 12 skills into the right directory.
+
+### Common variants
+
+```bash
+# Install all skills to all detected agents, no prompts
+npx skills add prodbyEDDY/canon-dev --all
+
+# Install to a specific agent
+npx skills add prodbyEDDY/canon-dev -a claude-code
+npx skills add prodbyEDDY/canon-dev -a codex
+npx skills add prodbyEDDY/canon-dev -a cursor
+
+# Install globally (user home) instead of current project
+npx skills add prodbyEDDY/canon-dev -g
+
+# Install one specific skill only
+npx skills add prodbyEDDY/canon-dev --skill braindump-to-canon
+
+# Preview without installing
+npx skills add prodbyEDDY/canon-dev --list
+
+# Update to latest version later
+npx skills update
+```
+
+### Manual install (no Node.js)
+
+<details>
+<summary>Expand for git-based install</summary>
+
+```bash
+# Claude Code (mac/Linux)
+git clone https://github.com/prodbyEDDY/canon-dev.git ~/canon-dev
 mkdir -p ~/.claude/skills
 ln -s ~/canon-dev/skills/* ~/.claude/skills/
 
-# 3. Verify (in Claude Code session)
-#    Ask Claude: "List my available skills"
-#    You should see all 11 canon-* and braindump-to-canon skills.
+# Codex CLI
+mkdir -p ~/.codex/skills
+ln -s ~/canon-dev/skills/* ~/.codex/skills/
 ```
 
-**Windows (PowerShell, run as Administrator):**
+**Windows (PowerShell as Administrator):**
 
 ```powershell
 git clone https://github.com/prodbyEDDY/canon-dev.git $HOME\canon-dev
@@ -91,44 +122,9 @@ Get-ChildItem $HOME\canon-dev\skills | ForEach-Object {
 }
 ```
 
-**Per-project install** (skills available only inside one repo):
+Update with `cd ~/canon-dev && git pull` — symlinks pick up changes automatically.
 
-```bash
-mkdir -p .claude/skills
-ln -s ~/canon-dev/skills/* .claude/skills/
-```
-
-### OpenAI Codex CLI
-
-Codex CLI follows the same skill-protocol manifest format. Install path:
-
-```bash
-git clone https://github.com/prodbyEDDY/canon-dev.git ~/canon-dev
-mkdir -p ~/.codex/skills
-ln -s ~/canon-dev/skills/* ~/.codex/skills/
-```
-
-Verify by running `codex` and asking it to list available skills. If your Codex version uses a different skills directory, check `codex --help` or your platform docs and adjust the symlink target accordingly.
-
-### Cursor
-
-Cursor consumes skill manifests via its rules system. Either copy `SKILL.md` content into `.cursor/rules/` files, or load the canon-dev folder as an external rule set per Cursor's docs.
-
-### Continue.dev
-
-Continue accepts skill manifests in its standard format. Point your `config.json` at `~/canon-dev/skills/` or copy individual `SKILL.md` files into your Continue config directory.
-
-### Other platforms
-
-Any platform that loads skill manifests (YAML frontmatter + markdown body) will work. Each `SKILL.md` is self-contained — no platform-specific tool calls in the skill bodies, only generic instructions like "read file X" or "run command Y".
-
-### Update later
-
-```bash
-cd ~/canon-dev && git pull
-```
-
-Symlinks pick up the changes automatically. No re-link needed.
+</details>
 
 ---
 
@@ -138,7 +134,7 @@ After installation:
 
 1. **Try `braindump-to-canon` first** if you have a product idea but no formal documentation yet. It runs a structured interview and produces canons, specs, and a stack decision.
 2. **Try `canon-review` first** if you already have canons but suspect gaps. It runs an audit against a dimensional matrix.
-3. **Read [`SKILL.md`](SKILL.md)** — top-level navigator that decides which skill to invoke for any situation.
+3. **Read [`using-canon-dev`](skills/using-canon-dev/SKILL.md)** — top-level navigator that decides which skill to invoke for any situation.
 
 ---
 
@@ -207,7 +203,7 @@ Three things make this different from "write some docs first":
 
 | Document | What it covers |
 |----------|----------------|
-| [`SKILL.md`](SKILL.md) | Top-level navigator — which sub-skill to invoke for your current situation |
+| [`skills/using-canon-dev/SKILL.md`](skills/using-canon-dev/SKILL.md) | Top-level navigator — which sub-skill to invoke for your current situation |
 | [`docs/PHILOSOPHY.md`](docs/PHILOSOPHY.md) | The ten principles, with reasoning and exceptions |
 | [`docs/WORKFLOW.md`](docs/WORKFLOW.md) | Full pipeline, artifact diagrams, session model, anti-patterns |
 | [`docs/BRAND-VOICE.md`](docs/BRAND-VOICE.md) | Voice guidelines for canon and prompt copy |
@@ -218,13 +214,15 @@ Each skill in `skills/` has its own `SKILL.md` plus optional `references/` and `
 
 ## Compatibility
 
-| Platform | Status | Install path |
-|----------|--------|--------------|
-| **Claude Code** | Primary target | `~/.claude/skills/` |
-| **OpenAI Codex CLI** | Supported | `~/.codex/skills/` |
-| **Cursor** | Supported via rules | `.cursor/rules/` |
-| **Continue.dev** | Supported | Via `config.json` |
-| **Other platforms** | Works if they implement skill protocol | Platform-specific |
+All 50+ agents supported by [skills.sh](https://skills.sh) work out of the box, including:
+
+| Platform | Status |
+|----------|--------|
+| **Claude Code** | Primary target |
+| **OpenAI Codex CLI** | Supported |
+| **Cursor** | Supported |
+| **Continue.dev** | Supported |
+| **OpenCode, Cline, Amp, Gemini CLI, Roo, Kilo, Goose, Droid, Copilot CLI, …** | Supported via `npx skills add` |
 
 The skills themselves contain no platform-specific code — they are markdown instructions plus reference material. Tool names referenced inside skills (Read, Write, Edit, Bash, Glob, Grep) are Claude Code conventions; on other platforms, your loader maps them to local equivalents.
 

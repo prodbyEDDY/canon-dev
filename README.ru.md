@@ -62,24 +62,55 @@
 
 ## Установка
 
-Каждый скилл в `skills/` — самодостаточная папка с манифестом `SKILL.md` (YAML frontmatter + body) и опциональными `references/` или `templates/`. Установка — просто сделать эту папку видимой для платформы.
-
-### Claude Code
+Одна команда, любая платформа:
 
 ```bash
-# 1. Клонируем репозиторий
-git clone https://github.com/prodbyEDDY/canon-dev.git ~/canon-dev
+npx skills add prodbyEDDY/canon-dev
+```
 
-# 2. Симлинкуем скиллы в директорию Claude Code
+Использует [`skills`](https://skills.sh) CLI от Vercel Labs. Клонирует репо, спрашивает в какие агенты установить (Claude Code, Codex, Cursor, Continue, OpenCode, Cline, Amp, Gemini CLI — поддерживается 50+), и симлинкует все 12 скиллов в нужную директорию.
+
+### Часто используемые варианты
+
+```bash
+# Все скиллы во все обнаруженные агенты, без промптов
+npx skills add prodbyEDDY/canon-dev --all
+
+# В конкретный агент
+npx skills add prodbyEDDY/canon-dev -a claude-code
+npx skills add prodbyEDDY/canon-dev -a codex
+npx skills add prodbyEDDY/canon-dev -a cursor
+
+# Глобально (в домашнюю директорию) вместо текущего проекта
+npx skills add prodbyEDDY/canon-dev -g
+
+# Только один конкретный скилл
+npx skills add prodbyEDDY/canon-dev --skill braindump-to-canon
+
+# Превью без установки
+npx skills add prodbyEDDY/canon-dev --list
+
+# Обновление до последней версии позже
+npx skills update
+```
+
+### Ручная установка (без Node.js)
+
+<details>
+<summary>Развернуть для git-based install</summary>
+
+```bash
+# Claude Code (mac/Linux)
+git clone https://github.com/prodbyEDDY/canon-dev.git ~/canon-dev
 mkdir -p ~/.claude/skills
 ln -s ~/canon-dev/skills/* ~/.claude/skills/
 
-# 3. Проверка (в сессии Claude Code)
-#    Спроси Claude: «List my available skills» —
-#    должны увидеть все 11 canon-* и braindump-to-canon.
+# Codex CLI
+mkdir -p ~/.codex/skills
+ln -s ~/canon-dev/skills/* ~/.codex/skills/
 ```
 
-**Windows (PowerShell, запустить от имени Администратора):**
+**Windows (PowerShell от Администратора):**
 
 ```powershell
 git clone https://github.com/prodbyEDDY/canon-dev.git $HOME\canon-dev
@@ -89,44 +120,9 @@ Get-ChildItem $HOME\canon-dev\skills | ForEach-Object {
 }
 ```
 
-**Установка в один проект** (скиллы доступны только внутри одного репозитория):
+Обновление через `cd ~/canon-dev && git pull` — симлинки подхватят изменения автоматически.
 
-```bash
-mkdir -p .claude/skills
-ln -s ~/canon-dev/skills/* .claude/skills/
-```
-
-### OpenAI Codex CLI
-
-Codex CLI использует тот же формат skill-манифестов. Путь установки:
-
-```bash
-git clone https://github.com/prodbyEDDY/canon-dev.git ~/canon-dev
-mkdir -p ~/.codex/skills
-ln -s ~/canon-dev/skills/* ~/.codex/skills/
-```
-
-Проверь запустив `codex` и попросив показать доступные скиллы. Если твоя версия Codex использует другую директорию — посмотри `codex --help` или документацию платформы и подкорректируй цель симлинка.
-
-### Cursor
-
-Cursor подхватывает skill-манифесты через систему правил. Либо скопируй содержимое `SKILL.md` в файлы `.cursor/rules/`, либо подключи папку canon-dev как внешний rule set по документации Cursor.
-
-### Continue.dev
-
-Continue принимает skill-манифесты в стандартном формате. Укажи в `config.json` путь `~/canon-dev/skills/` или скопируй отдельные `SKILL.md` в директорию конфига Continue.
-
-### Другие платформы
-
-Любая платформа, которая загружает skill-манифесты (YAML frontmatter + markdown body), будет работать. Каждый `SKILL.md` самодостаточен — внутри нет platform-specific tool calls, только generic-инструкции вида «прочитай файл X» или «запусти команду Y».
-
-### Обновление
-
-```bash
-cd ~/canon-dev && git pull
-```
-
-Симлинки подхватят изменения автоматически. Перелинковка не нужна.
+</details>
 
 ---
 
@@ -136,7 +132,7 @@ cd ~/canon-dev && git pull
 
 1. **Начни с `braindump-to-canon`**, если есть продуктовая идея, но нет формальной документации. Скилл проводит структурированное интервью и выдаёт каноны, ТЗ и stack decision.
 2. **Начни с `canon-review`**, если каноны уже есть, но подозреваешь дыры. Скилл проходит по матрице измерений.
-3. **Прочитай [`SKILL.md`](SKILL.md)** — top-level навигатор, который решает какой sub-скилл вызвать в любой ситуации.
+3. **Прочитай [`using-canon-dev`](skills/using-canon-dev/SKILL.md)** — top-level навигатор, который решает какой sub-скилл вызвать в любой ситуации.
 
 ---
 
@@ -205,7 +201,7 @@ cd ~/canon-dev && git pull
 
 | Документ | Что покрывает |
 |---|---|
-| [`SKILL.md`](SKILL.md) | Top-level навигатор — какой sub-скилл вызвать для текущей ситуации |
+| [`skills/using-canon-dev/SKILL.md`](skills/using-canon-dev/SKILL.md) | Top-level навигатор — какой sub-скилл вызвать для текущей ситуации |
 | [`docs/PHILOSOPHY.md`](docs/PHILOSOPHY.md) | Десять принципов с обоснованиями и исключениями |
 | [`docs/WORKFLOW.md`](docs/WORKFLOW.md) | Полный pipeline, диаграммы артефактов, сессионная модель, анти-паттерны |
 | [`docs/BRAND-VOICE.md`](docs/BRAND-VOICE.md) | Голос документации — правила копирайта для канонов и промптов |
@@ -216,13 +212,15 @@ cd ~/canon-dev && git pull
 
 ## Совместимость
 
-| Платформа | Статус | Путь установки |
-|---|---|---|
-| **Claude Code** | Основная цель | `~/.claude/skills/` |
-| **OpenAI Codex CLI** | Поддерживается | `~/.codex/skills/` |
-| **Cursor** | Поддерживается через rules | `.cursor/rules/` |
-| **Continue.dev** | Поддерживается | Через `config.json` |
-| **Другие платформы** | Работает если поддерживают skill-протокол | Platform-specific |
+Все 50+ агентов из [skills.sh](https://skills.sh) поддерживаются из коробки, включая:
+
+| Платформа | Статус |
+|---|---|
+| **Claude Code** | Основная цель |
+| **OpenAI Codex CLI** | Поддерживается |
+| **Cursor** | Поддерживается |
+| **Continue.dev** | Поддерживается |
+| **OpenCode, Cline, Amp, Gemini CLI, Roo, Kilo, Goose, Droid, Copilot CLI, …** | Поддерживаются через `npx skills add` |
 
 Сами скиллы не содержат platform-specific кода — это markdown-инструкции плюс reference-материалы. Имена инструментов внутри скиллов (Read, Write, Edit, Bash, Glob, Grep) — конвенция Claude Code; на других платформах твой loader мапит их на локальные эквиваленты.
 
