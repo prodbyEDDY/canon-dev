@@ -1,0 +1,34 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.cursor/
+
+# Working files
+*.log
+node_modules/
+.env
+.env.local
+.env.*.local
+
+# Build output (if ever added)
+dist/
+build/
+out/
+
+# Python (if tooling added later)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local scratch
+scratch/
+tmp/

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Typography — Design System</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body {
+    background: var(--bg-soft);
+    padding: var(--s-12);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .back {
+    display: inline-block;
+    margin-bottom: var(--s-6);
+    color: var(--fg-3);
+    font-size: var(--t-body-sm);
+    text-decoration: none;
+  }
+  .back:hover { color: var(--brand-700); }
+  .lead { font-size: var(--t-body-lg); color: var(--fg-2); margin-bottom: var(--s-12); max-width: 640px; }
+  .section-label {
+    font-size: var(--t-meta);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--brand-600);
+    margin-top: var(--s-12);
+    margin-bottom: var(--s-4);
+  }
+  .specimen {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: var(--s-6);
+    margin-bottom: var(--s-3);
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: var(--s-6);
+    align-items: center;
+  }
+  .specimen .meta {
+    font-size: var(--t-meta);
+    color: var(--fg-3);
+    font-family: var(--font-mono);
+  }
+  .specimen .preview { color: var(--fg-1); }
+  .weights-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+    margin-bottom: var(--s-8);
+  }
+  .weight-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: var(--s-6);
+    text-align: center;
+  }
+  .weight-sample {
+    font-size: var(--t-h2);
+    color: var(--fg-1);
+    margin-bottom: var(--s-3);
+  }
+  .weight-meta { font-size: var(--t-caption); color: var(--fg-3); font-family: var(--font-mono); }
+  .rule-callout {
+    background: var(--brand-50);
+    border: 1px solid var(--brand-100);
+    border-radius: var(--r-lg);
+    padding: var(--s-6);
+    margin: var(--s-8) 0;
+    color: var(--fg-1);
+  }
+  .rule-callout strong { color: var(--brand-700); }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back">← Back to overview</a>
+
+<h1 class="t-h1">Typography</h1>
+<p class="lead">Одна семья шрифтов на всё. Иерархия — через размер, цвет и пространство, не через вес. Bold (600+) запрещён.</p>
+
+<div class="rule-callout">
+  <strong>Brand rule:</strong> NEVER bold. Только weights 300, 400, 500. Заголовки h1/h2 — Regular (400). Только h3/h4 могут быть Medium (500). Display-числа — Regular на крупном размере впечатляют сильнее чем Bold на мелком.
+</div>
+
+<div class="section-label">Type scale — 13 размеров</div>
+
+<div class="specimen">
+  <div class="meta">--t-display<br>72px</div>
+  <div class="preview" style="font-size: var(--t-display); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); font-weight: 400;">Display heading</div>
+</div>
+
+<div class="specimen">
+  <div class="meta">--t-h1<br>44px</div>
+  <div class="preview" style="font-size: var(--t-h1); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); font-weight: 400;">Page title — h1</div>
+</div>
+
+<div class="specimen">
+  <div class="meta">--t-h2<br>32px</div>
+  <div class="preview" style="font-size: var(--t-h2); line-height: var(--leading-snug); font-weight: 400;">Section header — h2</div>
+</div>
+
+<div class="specimen">
+  <div class="meta">--t-h3<br>24px</div>
+  <div class="preview" style="font-size: var(--t-h3); line-height: var(--leading-snug); font-weight: 500;">Sub-section — h3</div>
+</div>
+
+<div class="specimen">
+  <div class="meta">--t-h4<br>20px</div>
+  <div class="preview" style="font-size: var(--t-h4); line-height: var(--leading-snug); font-weight: 500;">Card title — h4</div>
+</div>
+
+<div class="specimen">
+  <div class="meta">--t-h5<br>18px</div>
+  <div class="preview" style="font-size: var(--t-h5); line-height: var(--leading-snug); font-weight: 500;">Inline header — h5</div>
+</div>
+
+<div class="specimen">
+  <div class="meta">--t-body-lg<br>17px</div>
+  <div class="preview" style="font-size: var(--t-body-lg); line-height: var(--leading-normal); color: var(--fg-2);">Lead paragraph — для интро-текстов и важных параграфов в hero-секциях</div>
+</div>
+
+<div class="specimen">
+  <div class="meta">--t-body<br>15px</div>
+  <div class="preview" style="font-size: var(--t-body); line-height: var(--leading-normal); color: var(--fg-2);">Default body — основной текст параграфов, описаний, инструкций. Достаточно крупный для комфортного чтения, не доминирует над заголовками.</div>
+</div>
+
+<div class="specimen">
+  <div class="meta">--t-body-sm<br>14px</div>
+  <div class="preview" style="font-size: var(--t-body-sm); line-height: var(--leading-normal); color: var(--fg-2);">Small body — для секондарных текстов в карточках, side-panels, footer.</div>
+</div>
+
+<div class="specimen">
+  <div class="meta">--t-caption<br>13px</div>
+  <div class="preview" style="font-size: var(--t-caption); line-height: var(--leading-snug); color: var(--fg-3);">Caption — подписи под полями, hints, meta-data</div>
+</div>
+
+<div class="specimen">
+  <div class="meta">--t-meta<br>12px UPPER</div>
+  <div class="preview" style="font-size: var(--t-meta); line-height: var(--leading-snug); color: var(--fg-3); letter-spacing: var(--tracking-wide); text-transform: uppercase;">EYEBROW · SECTION LABEL · METADATA</div>
+</div>
+
+<div class="section-label">Numeric type — для KPI и dashboard'ов</div>
+
+<div class="specimen">
+  <div class="meta">--t-num-xl<br>40px tnum</div>
+  <div class="preview" style="font-size: var(--t-num-xl); line-height: 1.05; letter-spacing: -0.01em; font-feature-settings: 'tnum' 1; font-weight: 400;">4 750 000 ₽</div>
+</div>
+
+<div class="specimen">
+  <div class="meta">--t-num-lg<br>28px tnum</div>
+  <div class="preview" style="font-size: var(--t-num-lg); line-height: 1.1; color: var(--brand-500); font-feature-settings: 'tnum' 1; font-weight: 400;">128</div>
+</div>
+
+<div class="section-label">Weights — только три</div>
+
+<div class="weights-grid">
+  <div class="weight-card">
+    <div class="weight-sample" style="font-weight: 300;">Light</div>
+    <div class="weight-meta">--weight-light · 300<br>Optional, для display-уровня</div>
+  </div>
+  <div class="weight-card">
+    <div class="weight-sample" style="font-weight: 400;">Regular</div>
+    <div class="weight-meta">--weight-regular · 400<br>Default для всего</div>
+  </div>
+  <div class="weight-card">
+    <div class="weight-sample" style="font-weight: 500;">Medium</div>
+    <div class="weight-meta">--weight-medium · 500<br>Max — для h3/h4 + UI labels</div>
+  </div>
+</div>
+
+<div class="rule-callout" style="background: var(--danger-bg); border-color: var(--danger-bg);">
+  <strong style="color: var(--danger);">Запрещено:</strong> Weight 600 (Semibold), 700 (Bold), 800 (Extra Bold), 900 (Black). Если ощущается что нужно «выделить сильнее» — используй больший размер или более насыщенный цвет, не вес.
+</div>
+
+<div class="section-label">Hierarchy без bold</div>
+
+<div style="background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s-8);">
+  <p style="font-size: var(--t-meta); color: var(--brand-600); text-transform: uppercase; letter-spacing: var(--tracking-wide); margin: 0 0 var(--s-2);">EYEBROW</p>
+  <h1 style="font-size: var(--t-h1); font-weight: 400; line-height: 1.1; margin: 0 0 var(--s-4); color: var(--fg-1); letter-spacing: -0.015em;">Hierarchy строится размером, не весом</h1>
+  <p style="font-size: var(--t-body-lg); line-height: var(--leading-normal); color: var(--fg-2); margin: 0 0 var(--s-4); max-width: 560px;">Лидирующий параграф объясняет о чём раздел в одно-два предложения. Используется размер 17px для отделения от тела текста.</p>
+  <p style="font-size: var(--t-body); line-height: var(--leading-normal); color: var(--fg-2); margin: 0; max-width: 640px;">Основной текст — 15px Regular. Несмотря на одинаковый вес с заголовком, разница в размере (44px vs 15px) создаёт чёткую визуальную иерархию. Это и есть искомый эффект — спокойный, не кричащий, но безусловно структурированный.</p>
+</div>
+
+</body>
+</html>

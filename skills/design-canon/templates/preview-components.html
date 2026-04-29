@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Components — Design System</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body {
+    background: var(--bg-soft);
+    padding: var(--s-12);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .back {
+    display: inline-block;
+    margin-bottom: var(--s-6);
+    color: var(--fg-3);
+    font-size: var(--t-body-sm);
+    text-decoration: none;
+  }
+  .back:hover { color: var(--brand-700); }
+  .section-label {
+    font-size: var(--t-meta);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--brand-600);
+    margin-top: var(--s-12);
+    margin-bottom: var(--s-4);
+  }
+  .demo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--s-4);
+    margin-bottom: var(--s-8);
+  }
+  .demo-row {
+    display: flex;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+    align-items: center;
+    padding: var(--s-6);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    margin-bottom: var(--s-4);
+  }
+  .demo-label {
+    font-size: var(--t-meta);
+    color: var(--fg-3);
+    font-family: var(--font-mono);
+    margin-bottom: var(--s-3);
+  }
+  .kpi-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-1);
+    border-radius: var(--r-lg);
+    padding: var(--s-5);
+    transition: border-color var(--dur-base) var(--ease-out),
+                box-shadow var(--dur-base) var(--ease-out);
+  }
+  .kpi-card:hover {
+    border-color: var(--brand-200);
+    box-shadow: var(--shadow-2);
+  }
+  .kpi-eyebrow {
+    font-size: var(--t-meta);
+    color: var(--fg-3);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    margin-bottom: var(--s-2);
+  }
+  .kpi-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--r-md);
+    background: var(--brand-100);
+    color: var(--brand-700);
+    display: grid;
+    place-items: center;
+    float: right;
+    margin-top: -4px;
+  }
+  .kpi-number {
+    font-size: 30px;
+    line-height: 1.1;
+    color: var(--fg-1);
+    font-feature-settings: 'tnum' 1;
+    margin-bottom: var(--s-3);
+  }
+  .kpi-delta {
+    font-size: var(--t-meta);
+    color: var(--fg-3);
+  }
+  .kpi-trend {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px 6px;
+    background: var(--success-bg);
+    color: var(--success);
+    border-radius: var(--r-pill);
+    font-size: 11px;
+    margin-left: var(--s-2);
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back">← Back to overview</a>
+
+<h1 class="t-h1">Components</h1>
+<p class="t-body-lg" style="margin-bottom: var(--s-12); max-width: 640px;">Базовые UI-примитивы из дизайн-системы. Каждый собран из CSS-токенов в <code>tokens.css</code>. Hover-states работают — попробуй.</p>
+
+<div class="section-label">Buttons</div>
+
+<div class="demo-row">
+  <div style="display: flex; gap: var(--s-3); align-items: center;">
+    <button class="btn btn-primary">Primary action</button>
+    <button class="btn btn-secondary">Secondary</button>
+    <button class="btn btn-ghost">Ghost</button>
+    <button class="btn btn-danger">Danger</button>
+  </div>
+</div>
+
+<div class="demo-label">Sizes (через padding scale)</div>
+<div class="demo-row">
+  <button class="btn btn-primary" style="padding: var(--s-2) var(--s-4); font-size: var(--t-body-sm);">Small</button>
+  <button class="btn btn-primary">Default</button>
+  <button class="btn btn-primary" style="padding: var(--s-4) var(--s-8); font-size: var(--t-body-lg);">Large</button>
+</div>
+
+<div class="demo-label">With icons (lucide-style — здесь представлены unicode arrows для preview)</div>
+<div class="demo-row">
+  <button class="btn btn-primary">Создать <span style="margin-left: 4px;">→</span></button>
+  <button class="btn btn-secondary"><span style="margin-right: 4px;">↓</span> Скачать</button>
+  <button class="btn btn-ghost">Ещё <span style="margin-left: 4px;">⋯</span></button>
+</div>
+
+<div class="section-label">Cards</div>
+
+<div class="demo-grid">
+  <div class="card">
+    <h3 class="t-h4" style="margin-bottom: var(--s-2);">Default card</h3>
+    <p class="t-body-sm">White bg, hairline border, subtle shadow. Hover активирует brand-200 border + shadow-2.</p>
+  </div>
+  <div class="card" style="background: var(--brand-50); border-color: var(--brand-100);">
+    <h3 class="t-h4" style="margin-bottom: var(--s-2);">Tinted accent</h3>
+    <p class="t-body-sm">Brand-50 bg, brand-100 border. Для важных карточек требующих акцента.</p>
+  </div>
+  <div class="card" style="background: var(--brand-800); border-color: var(--brand-800);">
+    <h3 class="t-h4" style="color: white; margin-bottom: var(--s-2);">Dark accent</h3>
+    <p class="t-body-sm" style="color: rgba(255,255,255,0.8);">Brand-800 bg, white text. Для contrast-моментов: hero-CTA bars, focus-cards.</p>
+  </div>
+</div>
+
+<div class="section-label">KPI cards</div>
+
+<div class="demo-grid">
+  <div class="kpi-card">
+    <div class="kpi-icon">📊</div>
+    <div class="kpi-eyebrow">Выручка</div>
+    <div class="kpi-number">4 750 000 ₽</div>
+    <div class="kpi-delta">vs прошлый месяц <span class="kpi-trend">↑ 12,4%</span></div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-icon">📋</div>
+    <div class="kpi-eyebrow">Активные задачи</div>
+    <div class="kpi-number">23</div>
+    <div class="kpi-delta">из них 3 просрочено</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-icon">✓</div>
+    <div class="kpi-eyebrow">Документы</div>
+    <div class="kpi-number">87</div>
+    <div class="kpi-delta">12 ожидают подписания</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-icon">📈</div>
+    <div class="kpi-eyebrow">Конверсия</div>
+    <div class="kpi-number">21,4%</div>
+    <div class="kpi-delta">vs прошлый период <span class="kpi-trend" style="background: var(--danger-bg); color: var(--danger);">↓ 2,1%</span></div>
+  </div>
+</div>
+
+<div class="section-label">Inputs</div>
+
+<div class="demo-row" style="display: block;">
+  <label style="font-size: var(--t-caption); color: var(--fg-2); display: block; margin-bottom: var(--s-2);">Email</label>
+  <input class="input" placeholder="user@example.com" style="max-width: 320px; margin-bottom: var(--s-4);">
+
+  <label style="font-size: var(--t-caption); color: var(--fg-2); display: block; margin-bottom: var(--s-2);">Описание</label>
+  <textarea class="input" placeholder="Несколько предложений…" rows="3" style="max-width: 320px; margin-bottom: var(--s-4); font-family: var(--font-sans);"></textarea>
+
+  <label style="font-size: var(--t-caption); color: var(--fg-2); display: block; margin-bottom: var(--s-2);">Состояние</label>
+  <select class="input" style="max-width: 320px;">
+    <option>Активно</option>
+    <option>На паузе</option>
+    <option>Архив</option>
+  </select>
+</div>
+
+<div class="section-label">Badges &amp; Pills</div>
+
+<div class="demo-row">
+  <span class="badge badge-success">Активно</span>
+  <span class="badge badge-warning">В работе</span>
+  <span class="badge badge-danger">Просрочено</span>
+  <span class="badge badge-info">Новое</span>
+  <span class="badge badge-neutral">Архив</span>
+</div>
+
+<div class="demo-label">Status indicators with dot</div>
+<div class="demo-row">
+  <span class="badge badge-success" style="padding-left: var(--s-3);">
+    <span style="width: 6px; height: 6px; background: var(--success); border-radius: 50%;"></span>
+    Online
+  </span>
+  <span class="badge badge-warning" style="padding-left: var(--s-3);">
+    <span style="width: 6px; height: 6px; background: var(--warning); border-radius: 50%;"></span>
+    Pending
+  </span>
+  <span class="badge badge-danger" style="padding-left: var(--s-3);">
+    <span style="width: 6px; height: 6px; background: var(--danger); border-radius: 50%;"></span>
+    Failed
+  </span>
+</div>
+
+<div class="section-label">Empty states</div>
+
+<div class="demo-row" style="flex-direction: column; align-items: center; padding: var(--s-12);">
+  <div style="width: 64px; height: 64px; background: var(--brand-50); border-radius: 50%; display: grid; place-items: center; margin-bottom: var(--s-4); color: var(--brand-700); font-size: 32px;">∅</div>
+  <h3 class="t-h4" style="margin-bottom: var(--s-2);">Нет операций за выбранный период</h3>
+  <p class="t-body-sm" style="text-align: center; max-width: 320px; margin-bottom: var(--s-5);">Создайте первую операцию или измените фильтр периода в верхней панели.</p>
+  <button class="btn btn-primary">Создать операцию</button>
+</div>
+
+</body>
+</html>
