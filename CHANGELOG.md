@@ -9,13 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-04-29
+
 ### Changed
 - One-line install via `npx skills add prodbyEDDY/canon-dev` ([skills.sh](https://skills.sh) ecosystem) replaces the manual git+symlink instructions. Manual install kept as a fallback in collapsed `<details>`.
 - Top-level `SKILL.md` (the navigator) moved to `skills/using-canon-dev/SKILL.md` so the `skills` CLI discovers all 12 skills (was finding only the root one). Total skill count is now 12 (1 navigator + 6 main + 5 cross-cutting).
 - Pixel-art cover image added to README hero (`assets/cover.jpg`); the small SVG logo is no longer rendered in the README but remains in `assets/logo.svg` for other uses.
 
 ### Fixed
-- `canon-tdd` and `canon-receive-review` SKILL.md descriptions used unquoted YAML colon-space sequences (`discipline: write`, `Enforces: technical`) that caused YAML parsers to mis-detect them. Replaced with em-dash and removed the colon respectively.
+- `canon-tdd` and `canon-receive-review` SKILL.md descriptions used unquoted YAML colon-space sequences (`discipline: write`, `Enforces: technical`) that caused YAML parsers to mis-detect them and skip them during `npx skills add` enumeration. Replaced with em-dash and removed the colon respectively.
+
+### Removed
+- Empty `references/` directories under `canon-parallel/` and `canon-receive-review/` (these skills had no reference files to put there yet).
 
 ## [0.1.0] - 2026-04-29
 
@@ -47,5 +52,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `CONTRIBUTING.md` — skill conventions and PR process.
 - `assets/logo.svg` — rocket-on-foundation logo.
 
-[Unreleased]: https://github.com/prodbyEDDY/canon-dev/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/prodbyEDDY/canon-dev/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/prodbyEDDY/canon-dev/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/prodbyEDDY/canon-dev/releases/tag/v0.1.0
