@@ -1,6 +1,6 @@
 ---
 name: canon-tdd
-description: Use when implementing any feature or bugfix that has testable logic — particularly business calculations, lifecycle transitions, validators, money handling, antidubli enforcement. Enforces RED-GREEN-REFACTOR discipline: write a failing test first, write minimum code to pass, refactor while keeping tests green. Defines what to test (high-leverage paths) and what NOT to test (UI snapshots, framework code, trivial getters). Cross-cuts canon-execute — invoked alongside it for testable phases.
+description: Use when implementing any feature or bugfix that has testable logic — particularly business calculations, lifecycle transitions, validators, money handling, antidubli enforcement. Enforces RED-GREEN-REFACTOR discipline — write a failing test first, write minimum code to pass, refactor while keeping tests green. Defines what to test (high-leverage paths) and what NOT to test (UI snapshots, framework code, trivial getters). Cross-cuts canon-execute — invoked alongside it for testable phases.
 ---
 
 # canon-tdd

@@ -1,6 +1,6 @@
 ---
 name: canon-receive-review
-description: Use when receiving code review feedback on a PR (from coordinator or auditor) and need to respond technically — implement suggestions, push back on questionable feedback, document acknowledged tradeoffs. Enforces: technical rigor over performative agreement, verify before implement, document why-not when declining, batch responses to reduce churn.
+description: Use when receiving code review feedback on a PR (from coordinator or auditor) and need to respond technically — implement suggestions, push back on questionable feedback, document acknowledged tradeoffs. Enforces technical rigor over performative agreement, verify before implement, document why-not when declining, batch responses to reduce churn.
 ---
 
 # canon-receive-review
